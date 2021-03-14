@@ -82,8 +82,8 @@ class UndirectedGraph:
         """
         if v in self.adj_list:
             # delete instances of vertex v in other lists
-            for edge in self.adj_list[v]:
-                self.adj_list[edge].remove(v)
+            for i in self.adj_list:
+                self.adj_list[i].remove(v)
             # delete vertex v
             del self.adj_list[v]
 

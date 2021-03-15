@@ -68,6 +68,8 @@ class DirectedGraph:
 
         self.adj_matrix.append(new)
 
+        return self.v_count
+
 
     def add_edge(self, src: int, dst: int, weight=1) -> None:
         """

@@ -142,7 +142,7 @@ class DirectedGraph:
                 return False
 
         j = 0
-        while j < self.v_count - 1:
+        while j < len(path) - 1:
             i = j
             j += 1
             src = path[i]

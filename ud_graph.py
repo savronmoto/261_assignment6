@@ -74,6 +74,8 @@ class UndirectedGraph:
         if v in self.adj_list and u in self.adj_list:
             self.adj_list[v].remove(u)
             self.adj_list[u].remove(v)
+        else:
+            return None
 
 
     def remove_vertex(self, v: str) -> None:

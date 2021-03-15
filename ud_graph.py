@@ -78,7 +78,7 @@ class UndirectedGraph:
             if u in self.adj_list[v]:
                 self.adj_list[v].remove(u)
             if v in self.adj_list[u]:
-            self.adj_list[u].remove(v)
+                self.adj_list[u].remove(v)
         else:
             return None
 

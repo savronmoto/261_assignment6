@@ -75,7 +75,9 @@ class UndirectedGraph:
         Remove edge from the graph
         """
         if v in self.adj_list and u in self.adj_list:
-            self.adj_list[v].remove(u)
+            if u in self.adj_list[v]:
+                self.adj_list[v].remove(u)
+            if v in self.adj_list[u]:
             self.adj_list[u].remove(v)
         else:
             return None

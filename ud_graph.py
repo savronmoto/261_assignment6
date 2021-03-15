@@ -87,7 +87,8 @@ class UndirectedGraph:
                     self.adj_list[i].remove(v)
             # delete vertex v
             del self.adj_list[v]
-
+        else:
+            return None
 
     def get_vertices(self) -> []:
         """

@@ -113,10 +113,12 @@ class DirectedGraph:
         3rd = weight. List is not ordered.
         """
         edges = []
-        for list in self.adj_matrix:
-            for v in list:
+        for i in range(self.v_count):
+            lst = self.adj_matrix[i]
+            for x in range(len(lst)):
+                v = lst[x]
                 if v != 0:
-                    edges.append((self.adj_matrix.index(list), list.index(v), v))
+                    edges.append((i, x, v))
 
         return edges
 

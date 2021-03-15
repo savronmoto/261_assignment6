@@ -141,16 +141,14 @@ class DirectedGraph:
             else:
                 return False
 
-        i = 0
-        j = 1
+        j = 0
         while j < self.v_count - 1:
+            i = j
+            j += 1
             src = path[i]
             dst = path[j]
             if self.adj_matrix[src][dst] == 0:
                 return False
-            if j <= self.v_count - 1:
-                i += 1
-                j += 1
         return True
 
 

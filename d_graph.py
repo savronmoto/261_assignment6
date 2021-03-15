@@ -178,9 +178,10 @@ class DirectedGraph:
             if v not in visited_vertices:
                 visited_vertices.append(v)
                 temp = []
-                for ele in self.adj_matrix[v]:
+                for i in range(len(self.adj_matrix[v])):
+                    ele = self.adj_matrix[v][i]
                     if ele != 0:
-                        temp.append(self.adj_matrix[v].index(ele))
+                        temp.append(i)
                 temp.sort(reverse=True)
                 for i in temp:
                     stack.append(i)
@@ -276,7 +277,7 @@ if __name__ == '__main__':
 
     print("\nPDF - method dfs() and bfs() example 1")
     print("--------------------------------------")
-    edges = [(0, 1, 10), (4, 0, 12), (1, 4, 15), (4, 3, 3),
+    edges = [(0, 1, 10), (4, 0, 12), (1, 4, 15), (4, 3, 12),
              (3, 1, 5), (2, 1, 23), (3, 2, 7)]
     g = DirectedGraph(edges)
     for start in range(5):

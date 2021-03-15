@@ -92,7 +92,7 @@ class DirectedGraph:
         Removes an edge between two vertices. If either (or both) vertex indices do not exist in the graph,
         or if there is no edge between them, the method does nothing.
         """
-        if src > self.v_count - 1 or dst > self.v_count - 1:
+        if src > self.v_count - 1 or src < 0 or dst > self.v_count - 1 or dst < 0:
             return
 
         self.adj_matrix[src][dst] = 0

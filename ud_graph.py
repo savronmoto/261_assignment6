@@ -131,18 +131,30 @@ class UndirectedGraph:
         if len(path) == 1 and path[0] not in self.adj_list:
             return False
 
-        dic = self.adj_list
-        i = 1
-        k = 0
-        keys = self.get_vertices()
+        i = 0
+        j = 1
 
-        for v in range(len(path) - 1):
-            key = keys[k]
-            if path[i] not in dic[key]:
+        while j < len(path):
+            neighbors = self.adj_list[path[i]]
+            if path[j] not in neighbors:
                 return False
-            i += 1
-            k += 1
+            i = j
+            j += 1
+
         return True
+
+        # dic = self.adj_list
+        # i = 1
+        # k = 0
+        # keys = self.get_vertices()
+        #
+        # for v in range(len(path) - 1):
+        #     key = keys[k]
+        #     if path[i] not in dic[key]:
+        #         return False
+        #     i += 1
+        #     k += 1
+        # return True
 
 
     def dfs(self, v_start, v_end=None) -> []:
@@ -305,13 +317,6 @@ if __name__ == '__main__':
     print(g)
     g.remove_vertex('D')
     print(g)
-
-    print('\nremove sav edition')
-    g = UndirectedGraph(['KB', 'KE', 'BK', 'BG', 'EG', 'EC', 'EI', 'EK', 'CJ'])
-    print(g)
-    g.remove_edge('r','E')
-    print(g)
-
 
     print("\nPDF - method get_vertices() / get_edges() example 1")
     print("---------------------------------------------------")

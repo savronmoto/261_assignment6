@@ -148,8 +148,9 @@ class DirectedGraph:
             dst = path[j]
             if self.adj_matrix[src][dst] == 0:
                 return False
-            i += 1
-            j += 1
+            if j <= self.v_count - 1:
+                i += 1
+                j += 1
         return True
 
 
@@ -216,9 +217,9 @@ class DirectedGraph:
                 if ele != 0:
                     temp.append(self.adj_matrix[v].index(ele))
                 temp.sort(reverse=True)
-            for i in temp:
-                if i not in visited_vertices:
-                    queue.append(i)
+                for i in temp:
+                    if i not in visited_vertices:
+                        queue.append(i)
 
         return visited_vertices
 

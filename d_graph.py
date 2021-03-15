@@ -212,9 +212,10 @@ class DirectedGraph:
             if v not in visited_vertices:
                 visited_vertices.append(v)
             temp = []
-            for ele in self.adj_matrix[v]:
+            for i in range(len(self.adj_matrix[v])):
+                ele = self.adj_matrix[v][i]
                 if ele != 0:
-                    temp.append(self.adj_matrix[v].index(ele))
+                    temp.append(i)
                 temp.sort(reverse=True)
                 for i in temp:
                     if i not in visited_vertices:

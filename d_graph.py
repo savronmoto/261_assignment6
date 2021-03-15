@@ -92,6 +92,9 @@ class DirectedGraph:
         Removes an edge between two vertices. If either (or both) vertex indices do not exist in the graph,
         or if there is no edge between them, the method does nothing.
         """
+        if src > self.v_count - 1 or dst > self.v_count - 1:
+            return
+
         self.adj_matrix[src][dst] = 0
 
     def get_vertices(self) -> []:
@@ -243,6 +246,9 @@ if __name__ == '__main__':
              (3, 1, 5), (2, 1, 23), (3, 2, 7)]
     for src, dst, weight in edges:
         g.add_edge(src, dst, weight)
+    print(g)
+
+    g.remove_edge(0,1)
     print(g)
 
 

@@ -46,7 +46,7 @@ class UndirectedGraph:
         Add new vertex to the graph
         """
         if v in self.adj_list:
-            return
+            return None
 
         self.adj_list[v] = []
 
@@ -298,6 +298,13 @@ if __name__ == '__main__':
     print(g)
     g.remove_vertex('D')
     print(g)
+
+    print('\nremove sav edition')
+    g = UndirectedGraph(['KB', 'KE', 'BK', 'BG', 'EG', 'EC', 'EI', 'EK', 'CJ'])
+    print(g)
+    g.remove_edge('r','E')
+    print(g)
+
 
     print("\nPDF - method get_vertices() / get_edges() example 1")
     print("---------------------------------------------------")

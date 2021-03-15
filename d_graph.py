@@ -3,6 +3,8 @@
 # Assignment: 6 - Graphs
 # Description:
 
+from collections import deque
+
 class DirectedGraph:
     """
     Class to implement directed weighted graph
@@ -52,51 +54,165 @@ class DirectedGraph:
 
     def add_vertex(self) -> int:
         """
-        TODO: Write this implementation
+        Adds a new vertex to the graph, by increasing the adjacency matrix by 1.
+        Default weight is 0, and v_count is incremented.
         """
-        pass
+
+        self.v_count += 1
+
+        for list in self.adj_matrix:
+            list.append(0)
+        new = []
+        for _ in range(self.v_count):
+            new.append(0)
+
+        self.adj_matrix.append(new)
+
 
     def add_edge(self, src: int, dst: int, weight=1) -> None:
         """
-        TODO: Write this implementation
+        Adds an edge to the graph. Returns none if either of the vertices do not
+        exist in the graph, or if the weight is not a positive integer, or if the src
+        and dst are the same vertex. If the edge is already present, the weight is updated.
         """
-        pass
+        if src > self.v_count - 1 or dst > self.v_count - 1:
+            return
+        if weight < 1:
+            return
+        if src == dst:
+            return
+
+        self.adj_matrix[src][dst] = weight
+
 
     def remove_edge(self, src: int, dst: int) -> None:
         """
-        TODO: Write this implementation
+        Removes an edge between two vertices. If either (or both) vertex indices do not exist in the graph,
+        or if there is no edge between them, the method does nothing.
         """
-        pass
+        self.adj_matrix[src][dst] = 0
 
     def get_vertices(self) -> []:
         """
-        TODO: Write this implementation
+        Returns a list of the vertices in the graph.
         """
-        pass
+        vertices = []
+        for list in range(self.v_count):
+            vertices.append(list)
+        return vertices
 
     def get_edges(self) -> []:
         """
-        TODO: Write this implementation
+        Returns a list of edges in the graph. Each edge is returned as a tuple of two
+        incident vertex indices and weight. 1st element in tuple = source, 2nd = destination,
+        3rd = weight. List is not ordered.
         """
-        pass
+        edges = []
+        for list in self.adj_matrix:
+            for v in list:
+                if v != 0:
+                    edges.append((self.adj_matrix.index(list), list.index(v), v))
+
+        return edges
 
     def is_valid_path(self, path: []) -> bool:
         """
-        TODO: Write this implementation
+        Takes a list of vertex indices and returns True if the sequence of vertices
+        represents a valid path in the graph. Empty path is considered valid.
         """
-        pass
+        # Edge cases
+        if len(path) == 0:
+            return True
+        if len(path) == 1:
+            if path[0] < self.v_count:
+                return True
+            else:
+                return False
+        if len(path) == 2:
+            if self.adj_matrix[path[0]][path[1]] != 0:
+                return True
+            else:
+                return False
+
+        i = 0
+        j = 1
+        while j < self.v_count - 1:
+            src = path[i]
+            dst = path[j]
+            if self.adj_matrix[src][dst] == 0:
+                return False
+            i += 1
+            j += 1
+        return True
+
 
     def dfs(self, v_start, v_end=None) -> []:
         """
         TODO: Write this implementation
         """
-        pass
+        if v_start > self.v_count - 1:
+            return []
+
+        # for key in self.adj_list:
+        #     self.adj_list[key].sort(reverse=True)
+
+        visited_vertices = []
+        stack = deque()
+
+        # add first vertex
+        stack.append(v_start)
+
+        while len(stack) != 0:
+            v = stack.pop()
+            if v_end:
+                if v == v_end:
+                    visited_vertices.append(v)
+                    return visited_vertices
+            if v not in visited_vertices:
+                visited_vertices.append(v)
+                temp = []
+                for ele in self.adj_matrix[v]:
+                    if ele != 0:
+                        temp.append(self.adj_matrix[v].index(ele))
+                temp.sort(reverse=True)
+                for i in temp:
+                    stack.append(i)
+        return visited_vertices
 
     def bfs(self, v_start, v_end=None) -> []:
         """
         TODO: Write this implementation
         """
-        pass
+        if v_start > self.v_count - 1:
+            return []
+
+        # for key in self.adj_list:
+        #     self.adj_list[key].sort(reverse=True)
+
+        visited_vertices = []
+        queue = deque()
+
+        # add first vertex
+        queue.append(v_start)
+
+        while len(queue) != 0:
+            v = queue.popleft()
+            if v_end:
+                if v == v_end:
+                    visited_vertices.append(v)
+                    return visited_vertices
+            if v not in visited_vertices:
+                visited_vertices.append(v)
+            temp = []
+            for ele in self.adj_matrix[v]:
+                if ele != 0:
+                    temp.append(self.adj_matrix[v].index(ele))
+                temp.sort(reverse=True)
+                for i in temp:
+                    if i not in visited_vertices:
+                        queue.append(i)
+
+        return visited_vertices
 
     def has_cycle(self):
         """

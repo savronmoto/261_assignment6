@@ -143,20 +143,6 @@ class UndirectedGraph:
 
         return True
 
-        # dic = self.adj_list
-        # i = 1
-        # k = 0
-        # keys = self.get_vertices()
-        #
-        # for v in range(len(path) - 1):
-        #     key = keys[k]
-        #     if path[i] not in dic[key]:
-        #         return False
-        #     i += 1
-        #     k += 1
-        # return True
-
-
     def dfs(self, v_start, v_end=None) -> []:
         """
         Return list of vertices visited during DFS search

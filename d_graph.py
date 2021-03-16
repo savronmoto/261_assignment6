@@ -3,7 +3,9 @@
 # Assignment: 6 - Graphs
 # Description:
 
+import heapq
 from collections import deque
+
 
 class DirectedGraph:
     """
@@ -232,7 +234,56 @@ class DirectedGraph:
         """
         TODO: Write this implementation
         """
-        pass
+
+        visited_table = {}
+        # key is the vertex v
+        # value is th min distance d to vertex v
+
+        # insert source v into empty priority queue
+        # as a tuple of (distance(priority), vertex, previous)
+        hq = []
+        heapq.heappush(hq, (0, src, None))
+
+        #
+        while hq:
+            # Remove the first element (a vertex) from the priority queue
+            # and assign it to v. Let d be v’s distance (priority)
+            (d, v, p) = heapq.heappop(hq)
+            if v not in visited_table:
+                visited_table[v] = (d,p)
+                for i in range(len(self.adj_matrix[v])):
+                    cost = self.adj_matrix[v][i]
+                    if cost:
+                        dist = d + cost
+                        heapq.heappush(hq, (dist, i, v))
+
+        shortest_path = []
+
+        # for each vertex in the graph, call min_path function to find total distance
+        for i in range(len(self.adj_matrix)):
+            if i in visited_table:
+                shortest_path.append(visited_table[i][0])
+            else:
+                shortest_path.append(float('inf'))
+
+
+            # val = self.min_path(i,visited_table)
+            # shortest_path.append(val)
+
+        return shortest_path
+
+    def min_path(self, index, vertex_dict):
+        """helper method"""
+        # base case - if the parent is None, stop
+        if vertex_dict[index][1] is None:
+            return index
+
+        tup = vertex_dict[index]
+        distance = tup[0]
+
+        distance += self.min_path(tup[1],vertex_dict)
+
+        return distance
 
 
 if __name__ == '__main__':

@@ -232,7 +232,10 @@ class DirectedGraph:
 
     def dijkstra(self, src: int) -> []:
         """
-        TODO: Write this implementation
+        Finds the shortest path from a given vertex to all other vertices in the graph using the
+        Dijkstra algorithm. It returns a list of values that correspond to each vertex in the graph, where
+        the value at index 0 is the length of the shortest path from vertex SRC to vertex 0, and so on.
+        If a certain vertex is not reachable from SRC, returned value is infinity.
         """
 
         visited_table = {}

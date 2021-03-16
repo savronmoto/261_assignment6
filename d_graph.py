@@ -1,7 +1,10 @@
-# Course: CS261 - Data Structures
+# Course: 261
 # Author: Savanna Hanson
-# Assignment: 6 - Graphs
-# Description:
+# Assignment: 5 - Graph Implementation
+# Description: An directed graph ADT with vertices and edges stored as an adjacency matrix.
+# Methods include add_vertex, add_edge, remove_edge, get_vertices, get_edges, is_valid_path,
+# dfs, bfs, has_cycle, and dijksta.
+
 
 import heapq
 from collections import deque
@@ -156,8 +159,10 @@ class DirectedGraph:
 
     def dfs(self, v_start, v_end=None) -> []:
         """
-        TODO: Write this implementation
+        Performs a depth-first search (DFS) in the graph and returns a list of vertices
+        visited during the search, in the order they were visited.
         """
+
         if v_start > self.v_count - 1:
             return []
 
@@ -190,8 +195,10 @@ class DirectedGraph:
 
     def bfs(self, v_start, v_end=None) -> []:
         """
-        TODO: Write this implementation
+        Performs a breadth-first search (BFS) in the graph and returns a list of vertices
+        visited during the search, in the order they were visited.
         """
+
         if v_start > self.v_count - 1:
             return []
 

@@ -1,7 +1,10 @@
 # Course: 261
 # Author: Savanna Hanson
-# Assignment: 5 - graphs
-# Description:
+# Assignment: 5 - Graph Implementation
+# Description: An undirected graph ADT with vertices and edges stored as an adjacency list.
+# In addtion to methods for adding, removing, and getting edges and vertices, there are also methods for
+# checking whether a given path is valid, for depth and breadth first searches, counting connected components,
+# and checking if the graph is cyclic.
 
 from collections import deque
 
@@ -146,7 +149,7 @@ class UndirectedGraph:
     def dfs(self, v_start, v_end=None) -> []:
         """
         Return list of vertices visited during DFS search
-        Vertices are picked in alphabetical order
+        Vertices are picked in alphabetical order.
         """
         if v_start not in self.adj_list:
             return []

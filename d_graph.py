@@ -224,11 +224,48 @@ class DirectedGraph:
 
         return visited_vertices
 
+    def has_cycle_helper(self, v, visited, recStack):
+        """
+        Recursive helper for has_cycle method. Creates
+        Depth First Trees for each vertex in the graph to
+        find back edges, which indicates a cycle.
+        """
+        visited[v] = True
+        recStack[v] = True
+
+        for index in range(len(self.adj_matrix[v])):
+            # if a neighbor is visited and in recStack
+            # then there is a cycle.
+            neighbor = self.adj_matrix[v][index]
+            if neighbor != 0:
+                if not visited[index]:
+                    if self.has_cycle_helper(index, visited, recStack) == True:
+                        return True
+                elif recStack[index] == True:
+                    return True
+
+        recStack[v] = False
+        return False
+
+
     def has_cycle(self):
         """
-        TODO: Write this implementation
+        Determines if a graph (self) has a cycle. If graph is
+        cyclic, returns True, if acyclic, returns False.
+        Modified from https://www.geeksforgeeks.org/detect-cycle-in-a-graph/
         """
-        pass
+
+        # mark all the vertices as not visited
+        visited = [False] * self.v_count
+        recStack = [False] * self.v_count
+
+        for i in range(self.v_count):
+            if not visited[i]:
+                if self.has_cycle_helper(i, visited, recStack):
+                    return True
+
+        return False
+
 
     def dijkstra(self, src: int) -> []:
         """
